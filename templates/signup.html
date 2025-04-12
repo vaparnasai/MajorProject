@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Full height */
+            background-image: url('static/images/download.jpeg'); /* Background image */
+            background-size: cover; /* Cover the entire area */
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Align title and container vertically */
+            height: 100vh; /* Full viewport height */
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+            padding: 40px;
+            border-radius: 20px; /* Soft rounded corners */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Strong shadow for depth */
+            text-align: center;
+            width: 400px; /* Fixed width for the form */
+            margin-top: 20px; /* Space between title and form */
+        }
+        h1 {
+            margin-bottom: 20px; /* Space below the heading */
+            color:white; /* Coral color for the heading */
+            font-size: 2.5em; /* Larger font size */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for the heading */
+            text-align: center; /* Center the title */
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            padding: 15px; 
+            margin: 10px 0; 
+            width: 100%; /* Full width */
+            border: 2px solid #ff6f61; /* Coral border */
+            border-radius: 25px; /* Rounded edges */
+            transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for border color */
+        }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+            border-color: #feb47b; /* Change border color on focus */
+            box-shadow: 0 0 5px rgba(254, 180, 123, 0.7); /* Glow effect on focus */
+            outline: none; /* Remove default outline */
+        }
+        .button { 
+            padding: 15px 25px; 
+            background-color: #ff6f61; /* Coral button */
+            color: white; 
+            border: none; 
+            border-radius: 25px; /* More rounded corners for button */
+            cursor: pointer; 
+            margin-top: 15px; 
+            font-size: 1em; /* Standard font size for buttons */
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for button */
+        }
+        .button:hover { 
+            background-color: #ff5a47; /* Darker coral on hover */
+            transform: translateY(-2px); /* Lift effect on hover */
+        }
+        .button:active { 
+            transform: translateY(0); /* Reset lift effect */
+        }
+        p {
+            margin-top: 20px; /* Space above paragraph */
+            color: #444; /* Darker text color for contrast */
+        }
+        a {
+            color: #ff6f61; /* Coral link color */
+            text-decoration: none; /* Remove underline */
+            font-weight: bold; /* Bold links */
+        }
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Title of the Page -->
+    <h1>Detection of Fraudulent Transaction in Indian E-Commerce using DL</h1>
+    
+    <!-- Sign-Up Form Container -->
+    <div class="container">
+        <h2>Create Your Account</h2> <!-- Changed the heading here to differentiate from the page title -->
+        <form action="/submit_signup" method="POST">
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="email" name="email" placeholder="Email" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit" class="button">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>  <!-- Updated link -->
+    </div>
+</body>
+</html>

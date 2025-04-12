@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection of Fraudulent Transaction in Indian  E-Commerce using DL</title>
+    <style>
+        /* Existing Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('static/images/image6.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            color: #00796b;
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            animation: slideDown 0.5s ease-in-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            color: red;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            padding: 12px 25px;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1em;
+            transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: auto;
+        }
+
+        .button-rf { background-color: #ff7043; }
+        .button-dt{ background-color: #42a5f5; }
+        .button-cnn{ background-color: #e57373; }
+        .button-predict { background-color: #388e3c; }
+        .button-logout { background-color: #616161; }
+
+        .button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background-color: rgba(200, 198, 9, 0.5);
+        }
+
+        .button:active {
+            transform: scale(0.95);
+            box-shadow: none;
+        }
+
+        .content {
+            display: flex;
+            margin-top: 80px;
+            flex: 1;
+            padding: 10px;
+            gap: 10px;
+            overflow-y: auto;
+        }
+
+        .box {
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .upcoming-features {
+            animation-delay: 0.5s;
+            background: pink;
+        }
+
+        .project-overview {
+            animation-delay: 1s;
+            background: rgba(0, 150, 136, 0.8);
+            color: black;
+        }
+
+        .user-feedback {
+            animation-delay: 1.5s;
+            background: rgba(255, 235, 59, 0.8);
+        }
+
+        .box:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            font-size: 0.9em;
+            color:black;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+      <h1>Detection of Fraudulent Transaction in Indian  E-Commerce using DL</h1>
+        <div class="button-container">
+            <a href="{{ url_for('run_rf') }}" class="button button-rf">Run Random Forest</a>
+            <a href="{{ url_for('run_dt') }}" class="button button-dt">Run Decision Tree</a>
+            <a href="{{ url_for('run_cnn') }}" class="button button-cnn">Run CNN</a>
+            <a href="{{ url_for('predict') }}" class="button button-predict">Predict</a>
+            <a href="{{ url_for('logout') }}" class="button button-logout">Logout</a>
+        </div>
+    </div><br/><br/><br/><br/><br/><br/><br/>
+    <div class="content">
+        
+    </div>
+
+    <div class="footer">
+        &copy; 2025 Detection of Fraudulent Transaction in Indian  E-Commerce . All Rights Reserved.
+    </div>
+</body>
+</html>

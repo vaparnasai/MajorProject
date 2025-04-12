@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection of Fraudulent Transaction in E-Commerce using DL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+       body {
+            background-color: black; /* Fallback color */
+            background-image: url("{{ url_for('static', filename='images/fraud-detection-bg.jpg') }}"); /* Static image path */
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: #ffffff; /* White background */
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: 50px auto;
+            color: black;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2ecc71;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+        }
+
+        .submit-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.2em;
+            border: none;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .loading-indicator {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .loading-indicator img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .output-label {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #e74c3c;
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color:white;
+        }
+
+        .footer a {
+            color:white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .dashboard-link {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .dashboard-btn {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.1em;
+            display: inline-block;
+            margin-top: 20px;
+            width: 30%;
+            text-align: center;
+        }
+
+        .dashboard-btn:hover {
+            background-color: #c0392b;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Detection of Fraudulent Transaction in E-Commerce</h1>
+    <form method="POST" action="/predict" onsubmit="showLoadingIndicator(event)">
+        
+        <!-- Input fields for fraudulent transaction detection -->
+        <div class="input-group">
+            <label for="Transaction Amount">Transaction Amount</label>
+            <input type="number" name="Transaction Amount" id="Transaction Amount" required step="any" placeholder="Enter Transaction Amount">
+        </div>
+        <div class="input-group">
+            <label for="Payment Method">Payment Method</label>
+            <select name="Payment Method" id="Payment Method" required>
+                <option value="">Select Payment Method</option>
+                <option value="bank transfer">Bank Transfer</option>
+                <option value="debit card">Debit Card</option>
+                <option value="PayPal">PayPal</option>
+                <option value="credit card">Credit Card</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="Product Category">Product Category</label>
+            <select name="Product Category" id="Product Category" required>
+                <option value="">Select Product Category</option>
+                <option value="electronics">Electronics</option>
+                <option value="home & garden">Home & Garden</option>
+                <option value="clothing">Clothing</option>
+                <option value="toys & games">Toys & Games</option>
+                <option value="health & beauty">Health & Beauty</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="Quantity">Quantity</label>
+            <input type="number" name="Quantity" id="Quantity" required step="any" placeholder="Enter Quantity">
+        </div>
+
+        <div class="input-group">
+            <label for="Customer Age">Customer Age</label>
+            <input type="number" name="Customer Age" id="Customer Age" required step="any" placeholder="Enter Customer Age">
+        </div>
+
+        <!-- Dropdown for Customer Location -->
+        <div class="input-group">
+            <label for="Customer Location">Customer Location</label>
+            <select name="Customer Location" id="Customer Location" required>
+                <option value="">Select Customer Location</option>
+                <option value="Amandaborough">Amandaborough</option>
+                <option value="East Timothy">East Timothy</option>
+                <option value="Davismouth">Davismouth</option>
+                <option value="Lynnberg">Lynnberg</option>
+                <option value="South Nicole">South Nicole</option>
+                <option value="Herreramouth">Herreramouth</option>
+                <option value="Ramosfort">Ramosfort</option>
+                <option value="Port Emily">Port Emily</option>
+                <option value="Carneyfurt">Carneyfurt</option>
+                <option value="Brockburgh">Brockburgh</option>
+                <option value="Craneport">Craneport</option>
+                <option value="West Michael">West Michael</option>
+                <option value="Melindafurt">Melindafurt</option>
+                <option value="Deniseburgh">Deniseburgh</option>
+                <option value="Lamburgh">Lamburgh</option>
+                <option value="West Melissashire">West Melissashire</option>
+                <option value="Port Rebecca">Port Rebecca</option>
+                <option value="East Jonathan">East Jonathan</option>
+                <option value="Maloneshire">Maloneshire</option>
+                <option value="Muellerstad">Muellerstad</option>
+                <option value="Lake Elizabeth">Lake Elizabeth</option>
+                <option value="Jennifershire">Jennifershire</option>
+                <option value="Port Christopher">Port Christopher</option>
+                <option value="North Jacobmouth">North Jacobmouth</option>
+                <option value="Murrayton">Murrayton</option>
+                <option value="Popefort">Popefort</option>
+                <option value="Barronview">Barronview</option>
+                <option value="Jasonberg">Jasonberg</option>
+                <option value="West Amy">West Amy</option>
+                <option value="Ramoston">Ramoston</option>
+                <option value="West Richardbury">West Richardbury</option>
+                <option value="Lake Jimmyfurt">Lake Jimmyfurt</option>
+                <option value="Robbinsport">Robbinsport</option>
+                <option value="Morenostad">Morenostad</option>
+                <option value="West Kevin">West Kevin</option>
+                <option value="Lake Robertchester">Lake Robertchester</option>
+            </select>
+        </div>
+
+        <!-- Dropdown for Device Used -->
+        <div class="input-group">
+            <label for="Device Used">Device Used</label>
+            <select name="Device Used" id="Device Used" required>
+                <option value="">Select Device Used</option>
+                <option value="tablet">Tablet</option>
+                <option value="desktop">Desktop</option>
+                <option value="mobile">Mobile</option>
+            </select>
+        </div>
+
+        
+        <div class="input-group">
+            <label for="Account Age Days">Account Age (Days)</label>
+            <input type="number" name="Account Age Days" id="Account Age Days" required step="any" placeholder="Enter Account Age Days">
+        </div>
+
+        <div class="input-group">
+            <label for="Transaction Hour">Transaction Hour</label>
+            <input type="number" name="Transaction Hour" id="Transaction Hour" required placeholder="Enter Transaction Hour (24-hour format)">
+        </div>
+        <!-- Model dropdown -->
+        <div class="input-group">
+            <label for="model_type">Select Model</label>
+            <select name="model_type" id="model_type" required>
+                <option value="">Select Model</option>
+                <option value="rf">Random Forest</option>
+                <option value="dt">Decision Tree</option>
+                <option value="cnn">CNN</option>
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">Predict Fraudulent Transaction</button>
+    </form>
+
+
+    <!-- Loading Indicator -->
+    <div class="loading-indicator">
+        <img src="https://i.gifer.com/7ajs.gif" alt="Loading...">
+    </div>
+
+    <!-- Output Label for Prediction Result -->
+    <div class="output-label" id="outputLabel"></div>
+</div>
+
+<div class="dashboard-link">
+    <a href="/dashboard" class="dashboard-btn">Go to Dashboard</a>
+</div>
+
+<div class="footer">
+    &copy; 2025 Application of Deep Learning for Fraudulent Transaction Detection in E-Commerce. All Rights Reserved.
+</div>
+
+<script>
+    function showLoadingIndicator(event) {
+        event.preventDefault();
+        document.querySelector('.loading-indicator').style.display = 'block';
+        event.target.submit();
+    }
+</script>
+
+</body>
+</html>
